@@ -1,0 +1,82 @@
+<div class="container">
+    <h1 class="mt-3">Add Post</h1>
+    <form [formGroup]="blogpostForm" (ngSubmit)="onSubmit()">
+        <div class="mt-2">
+            <div class="mt-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" class="form-control" formControlName="title">
+            </div>
+      
+            <div class="mt-3">
+                <label for="shortDescription" class="form-label">Description</label>
+                <input type="text" id="shortDescription" class="form-control" formControlName="shortDescription">
+            </div>
+      
+            <div class="mt-3">
+                <label for="content" class="form-label">Content</label>
+                
+                <div class="d-flex flex-row">
+                    <div class="col-6 p-2">
+                        <textarea 
+                        id="content" 
+                        formControlName="content" 
+                        class="form-control" 
+                        style="height: 350px;max-height: 350px;">
+                        </textarea>
+                    </div>
+                    <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll;">
+                        <markdown [data]="model.content"></markdown>
+                    </div>
+                </div>
+            </div>
+      
+            <div class="mt-3">
+                <label for="featuredImageUrl" class="form-label">Featured Image URL</label>
+                <input type="text" id="featuredImageUrl" class="form-control" formControlName="featuredImageUrl">
+            </div>
+        
+            <div class="mt-3">
+                <label for="urlHandle" class="form-label">URL Handle</label>
+                <input type="text" id="urlHandle" class="form-control"  formControlName="urlHandle">
+            </div>
+        
+            <div class="mt-3">
+                <label for="publishedDate" class="form-label">Published Date</label>
+                <input type="date" id="publishedDate" class="form-control"  formControlName="publishedDate">
+            </div>
+        
+            <div class="mt-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" id="author" class="form-control"  formControlName="author">
+            </div>
+        
+            <div class="form-check mt-3">
+                <label for="isVisible" class="form-check-label">Is Visible?</label>
+                <input type="checkbox" id="isVisible"   formControlName="isVisible" class="form-check-input">
+            </div>
+
+            <div class="mt-3">
+                <label for="categories" class="form-label">Categories</label>
+        
+                <ng-container *ngIf="categories$ | async as categories">
+                  <select class="form-control" name="categories"
+                  id="categories" multiple (change)="onCategoriesChange($event)">
+                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                </select>
+                </ng-container>
+        
+            </div>
+        
+            <!-- <div formArrayName="categories">
+                <button (click)="addCategory()">Add Category</button>
+                <div *ngFor="let category of categories.controls; let i=index">
+                    <input [formControlName]="i" class="form-control" >
+                </div>
+            </div> -->
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+      </form>
+</div>
