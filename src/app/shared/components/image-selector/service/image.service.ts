@@ -18,8 +18,29 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
+  getImageById(id: string): Observable<BlogImage> {
+    return this.http.get<BlogImage>(`${environment.apiBaseUrl}/api/images/${id}`)
+  }
+
   getAllImages(): Observable<BlogImage[]> {
     return this.http.get<BlogImage[]>(`${environment.apiBaseUrl}/api/images`);
+  }
+
+  uploadImage(file: File, fileName: string, title: string): Observable<BlogImage> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', fileName);
+    formData.append('title', title);
+
+    return this.http.post<BlogImage>(`${environment.apiBaseUrl}/api/images`, formData);
+  }
+
+  selectImage(image: BlogImage): void {
+    this.selectedImage.next(image);
+  }
+
+  onSelectImage(): Observable<BlogImage> {
+    return this.selectedImage.asObservable();
   }
 
 }

@@ -12,8 +12,11 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { AddBlogpostComponent } from './features/blogpost/add-blogpost/add-blogpost.component';
 import { EditBlogpostComponent } from './features/blogpost/edit-blogpost/edit-blogpost.component';
 import { BlogpostListComponent } from './features/blogpost/blogpost-list/blogpost-list.component';
-import { HomeComponent } from './core/components/home/home.component';
+import { HomeComponent } from './features/public/home/home.component';
 import { ImageSelectorComponent } from './shared/components/image-selector/image-selector.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+
 
 @NgModule({
   declarations: [
@@ -26,14 +29,16 @@ import { ImageSelectorComponent } from './shared/components/image-selector/image
     EditBlogpostComponent,
     BlogpostListComponent,
     HomeComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MarkdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
